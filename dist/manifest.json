@@ -4,8 +4,11 @@
   "name": "KU-Lib-redirect",
   "version": "1.2",
   "description": "고려대학교 도서관으로 리다이렉트 해줍니다.",
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_popup": "popup.html"
   },
-  "permissions": ["activeTab", "scripting"]
+  "permissions": ["storage", "activeTab", "scripting"]
 }

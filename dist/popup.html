@@ -8,7 +8,11 @@
 <body>
     <style>
         html {
-            min-width: 700px;
+            min-width: 30rem;
+        }
+        div.button-group:has(button) {
+            display: flex;
+            gap: .5rem;
         }
         button {
             padding: 1rem 2rem;
@@ -16,16 +20,25 @@
             transition: 150ms;
             cursor: pointer;
         }
+        button > img {
+            max-width: 10rem;
+            height: auto;
+        }
         button:hover, button:focus {
             background-color: gray;
             color: white;
         }
     </style>
-    <h2>고려대학교 라이브러리로 리다이렉트</h2>
+    <h2>도서관 아이디로 리다이렉트</h2>
     <hr/>
-    <button id="redirection">
-        redirecting...
-    </button>
+    <div class="button-group">
+        <button data-name="고려대학교">
+            <img src="https://library.korea.ac.kr/wp-content/themes/kulib/images/logo.png" alt="고려대학교 도서관">
+        </button>
+        <button data-name="연세대학교">
+            <img src="https://library.yonsei.ac.kr/image/ko/local/logo.png" alt="연세대학교 학술문화처 도서관 로고 이미지">
+        </button>
+    </div>
     <script src="./popup.js"></script>
 </body>
 </html>

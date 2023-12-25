@@ -1,14 +1,35 @@
 {
   "manifest_version": 3,
   "author": "박재형",
-  "name": "KU-Lib-redirect",
-  "version": "1.2",
-  "description": "고려대학교 도서관으로 리다이렉트 해줍니다.",
+  "name": "Lib-redirect",
+  "version": "1.0.0.0",
+  "description": "대학교 도서관 아이디로 리다이렉트 해줍니다.",
   "background": {
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup/popup.html"
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png"
+    }
   },
-  "permissions": ["storage", "activeTab", "scripting"]
+  "icons": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://library.korea.ac.kr/"],
+      "run_at": "document_start",
+      "js": ["src/ChromeSetting.js", "src/korea-univ.js"]
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/ChromeSetting.js", "src/handler.js"]
+    }
+  ],
+  "host_permissions": [ "http://*/", "https://*/" ],
+  "permissions": ["storage", "activeTab", "scripting", "contextMenus"]
 }

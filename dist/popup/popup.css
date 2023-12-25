@@ -1,0 +1,25 @@
+html {
+    min-width: 30rem;
+}
+div.button-group:has(button) {
+    display: flex;
+    gap: .5rem;
+}
+button {
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+    transition: 150ms;
+    cursor: pointer;
+}
+button > img {
+    max-width: 10rem;
+    height: auto;
+}
+button:hover, button:focus {
+    background-color: gray;
+    color: white;
+}
+button.selected {
+    background-color: black;
+    box-shadow: 0 0 3px 3px black;
+}

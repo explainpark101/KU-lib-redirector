@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>app</title>
+    <link rel="stylesheet" href="./popup.js"/>
 </head>
 <body>
     <style>
@@ -24,19 +25,25 @@
             max-width: 10rem;
             height: auto;
         }
-        button:hover, button:focus {
+        button:hover {
             background-color: gray;
             color: white;
+        }
+        button.selected {
+            box-shadow: 0 0 0px 3px black;
         }
     </style>
     <h2>도서관 아이디로 리다이렉트</h2>
     <hr/>
     <div class="button-group">
-        <button data-name="고려대학교" title="고려대학교 도서관으로 리다이렉트">
+        <button data-name="고려대학교" title="고려대학교 도서관으로 리다이렉트" class="selected">
             <img src="https://library.korea.ac.kr/wp-content/themes/kulib/images/logo.png" title="고려대학교 도서관으로 리다이렉트" alt="고려대학교 도서관">
         </button>
         <button data-name="연세대학교" title="연세대학교 도서관으로 리다이렉트">
             <img src="https://library.yonsei.ac.kr/image/ko/local/logo.png" title="연세대학교 도서관으로 리다이렉트" alt="연세대학교 학술문화처 도서관">
+        </button>
+        <button data-name="한양대학교" title="한양대학교 도서관으로 리다이렉트">
+            <img src="https://www.hanyang.ac.kr/html-repositories/images/custom/introduction/img_hy0104_02_0204.png" title="한양대학교 도서관으로 리다이렉트" alt="한양대학교 백남학술정보관">
         </button>
     </div>
     <script src="./popup.js"></script>

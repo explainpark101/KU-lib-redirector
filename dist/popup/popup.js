@@ -1,7 +1,11 @@
-const redirectToLib = (학교명) => {
+const get_value_from_chrome_storage = (key) => (new Promise(res=>{chrome.storage.local.get(key, res)})).then(resp=>resp?.[key]);
+const set_value_at_chrome_storage = (key, value) => chrome.storage.local.set(Object.fromEntries([[key, value]]));
+
+const redirectToLib = async (학교명) => {
     const 학교목록 = {
         연세대학교: "-ssl.access.yonsei.ac.kr",
         고려대학교: "-ssl.oca.korea.ac.kr",
+        한양대학교: "-ssl.access.hanyang.ac.kr",
     }
     let original_host = location.host;
     for ([학교이름, url] of Object.entries(학교목록)) {
@@ -27,14 +31,20 @@ const redirectToLib = (학교명) => {
 
 
 const redirectTab = async 학교명 => {
-    const [currentTab] = await chrome.tabs.query({active: true, currentWindow: true});
-    await chrome.scripting.executeScript({
-        target: { tabId: currentTab.id },
-        func: redirectToLib,
-        args: [ 학교명 ],
-    }, window.close);
+    set_value_at_chrome_storage("default_lib", 학교명);
 };
 
 document.querySelector("div.button-group").addEventListener("click", async (e)=>{
-    await redirectTab(e.target.dataset?.name || e.target.parentElement.dataset?.name || alert('err'));
-})
+    let target = e.target;
+    while(target?.tagName != "BUTTON" && target != e.currentTarget) target = target.parentElement;
+    set_value_at_chrome_storage("default_lib", (e.target.dataset?.name || e.target.parentElement.dataset?.name));
+    document.querySelectorAll("div.button-group button").forEach(el=>el.classList.remove("selected"));
+    target.classList.add("selected");
+});
+(async () => {
+    const defaultLibrary = await get_value_from_chrome_storage("default_lib") ?? "고려대학교";
+    document.querySelectorAll("div.button-group button").forEach(el=>{
+        el.classList.remove("selected");
+        if(el.dataset?.name == defaultLibrary) el.classList.add("selected");
+    });
+})();
